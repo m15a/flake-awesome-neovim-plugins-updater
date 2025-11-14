@@ -1,16 +1,14 @@
 {
-  inputs.flakelight-treefmt.url = "github:m15a/flakelight-treefmt";
+  inputs = {
+    flakelight-treefmt.url = "github:m15a/flakelight-treefmt";
+    systems.url = "github:nix-systems/default";
+  };
 
-  outputs = { self, flakelight-treefmt, ... }:
+  outputs = { self, flakelight-treefmt, systems, ... }:
     flakelight-treefmt ./. {
       inputs.self = self;
 
-      systems = [
-        "x86_64-linux"
-        "x86_64-darwin"
-        "aarch64-linux"
-        "aarch64-darwin"
-      ];
+      systems = import systems;
 
       devShell.packages = pkgs: with pkgs; [
         nix-prefetch
