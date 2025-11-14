@@ -12,6 +12,10 @@
         "aarch64-darwin"
       ];
 
+      devShell.packages = pkgs: with pkgs; [
+        nix-prefetch
+      ];
+
       treefmtConfig.programs.nixfmt.enable = true;
     };
 }
