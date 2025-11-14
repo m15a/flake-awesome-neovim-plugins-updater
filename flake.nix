@@ -14,6 +14,15 @@
 
       devShell.packages = pkgs: with pkgs; [
         nix-prefetch
+        jq.bin
+        (luajit.withPackages (
+          ps: with ps; [
+            http
+            cjson
+            fennel
+            readline
+          ]
+        ))
       ];
 
       treefmtConfig.programs.nixfmt.enable = true;
