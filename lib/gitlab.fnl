@@ -1,0 +1,35 @@
+(import-macros {: unless} (.. (: ... :match "(.+)%.[^.]+") :.prelude))
+(local {: empty?} (require (.. (: ... :match "(.+)%.[^.]+") :.utils)))
+(local hub (require (.. (: ... :match "(.+)%.[^.]+") :.hub)))
+
+
+(local gitlab (let [self {:site "gitlab.com"
+                          :token_ {:env "GITLAB_TOKEN"}
+                          :base "gitlab.com/api/v4"}]
+                (setmetatable self {:__index hub})))
+
+(lambda gitlab.repo/query [_ owner repo]
+  (.. "projects/" owner "%2F" repo))
+
+(lambda gitlab.latest/query [_ owner repo ref]
+  (.. "projects/" owner "%2F" repo "/repository/branches/" ref))
+
+(lambda gitlab.tarball/url [_ owner repo ref]
+  (.. "https://gitlab.com/" owner "/" repo "/-/archive/" ref ".tar.gz"))
+
+(lambda gitlab.repo/preprocess
+  [_ {: default_branch : description : web_url : path : namespace}]
+  {:owner namespace.path
+   :repo path
+   :default_ref default_branch
+   :description (unless (empty? description) description)
+   :homepage (unless (empty? web_url) web_url)})
+
+(lambda gitlab.latest/preprocess [_ {: commit}]
+  {:rev commit.id
+   :timestamp commit.committed_date})
+
+
+gitlab
+
+;; vim: lw+=unless
