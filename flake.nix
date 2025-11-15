@@ -31,6 +31,7 @@
           );
         in
         pkgs.callPackage ./package.nix { inherit version luajit; };
+      devShell.packages = pkgs: [ pkgs.luajit.pkgs.readline ];
       treefmtConfig.programs = {
         nixfmt.enable = true;
         mdformat.enable = true;
