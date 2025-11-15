@@ -1,8 +1,7 @@
 (local http/request (require :http.request))
 
-(import-macros {: assert/type : assert/?type}
-               (.. (: ... :match "(.+)%.[^.]+") :.prelude))
-(local log (require (.. (: ... :match "(.+)%.[^.]+") :.log)))
+(import-macros {: assert/type : assert/?type} :lib.prelude)
+(local log (require :lib.log))
 
 
 (lambda get [uri ?header ?retry ?interval]

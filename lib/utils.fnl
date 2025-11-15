@@ -1,7 +1,8 @@
-(import-macros {: assert/type} (.. (: ... :match "(.+)%.[^.]+") :.prelude))
-(local {: merge!} (require (.. (: ... :match "(.+)%.[^.]+") :.prelude)))
-(local json (require (.. (: ... :match "(.+)%.[^.]+") :.json)))
-(local counter (require (.. (: ... :match "(.+)%.[^.]+") :.counter)))
+(import-macros {: assert/type} :lib.prelude)
+(local {: merge!} (require :lib.prelude))
+(local counter (require :lib.counter))
+(local json (require :lib.json))
+
 
 (fn empty? [x]
   (or (= nil x)
@@ -21,7 +22,6 @@
         stats (merge! counts {: total})]
     (set stats.time (os.time))
     (values plugins stats)))
-
 
 
 {: empty?

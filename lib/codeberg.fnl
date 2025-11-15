@@ -1,6 +1,6 @@
-(import-macros {: unless} (.. (: ... :match "(.+)%.[^.]+") :.prelude))
-(local {: empty?} (require (.. (: ... :match "(.+)%.[^.]+") :.utils)))
-(local hub (require (.. (: ... :match "(.+)%.[^.]+") :.hub)))
+(import-macros {: unless} :lib.prelude)
+(local hub (require :lib.hub))
+(local {: empty?} (require :lib.utils))
 
 
 (local codeberg (let [self {:site "codeberg.org"

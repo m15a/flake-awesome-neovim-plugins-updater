@@ -3,16 +3,13 @@
 
 (local cjson (require :cjson))
 
-(import-macros {: assert/type : assert/?type : unless}
-               (.. (: ... :match "(.+)%.[^.]+") :.prelude))
-(local {: clone : merge! : ignore-case-string=}
-       (require (.. (: ... :match "(.+)%.[^.]+") :.prelude)))
-(local {: timestamp->date}
-       (require (.. (: ... :match "(.+)%.[^.]+") :.utils)))
-(local http (require (.. (: ... :match "(.+)%.[^.]+") :.http)))
-(local json (require (.. (: ... :match "(.+)%.[^.]+") :.json)))
-(local nix (require (.. (: ... :match "(.+)%.[^.]+") :.nix)))
-(local log (require (.. (: ... :match "(.+)%.[^.]+") :.log)))
+(import-macros {: assert/type : assert/?type : unless} :lib.prelude)
+(local {: clone : merge! : ignore-case-string=} (require :lib.prelude))
+(local http (require :lib.http))
+(local json (require :lib.json))
+(local log (require :lib.log))
+(local nix (require :lib.nix))
+(local {: timestamp->date} (require :lib.utils))
 
 
 (local hub {:site "missing.hub"

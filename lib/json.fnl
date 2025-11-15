@@ -1,8 +1,9 @@
 (local {: view} (require :fennel))
+
 (local cjson (require :cjson.safe))
 
-(local {: file->string : string->file}
-       (require (.. (: ... :match "(.+)%.[^.]+") :.file)))
+(local {: file->string : string->file} (require :lib.file))
+
 
 (lambda file->decoded [path]
   (case (file->string path)

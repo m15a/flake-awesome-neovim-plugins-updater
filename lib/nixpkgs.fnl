@@ -1,8 +1,7 @@
-(import-macros {: assert/type : assert/?type}
-               (.. (: ... :match "(.+)%.[^.]+") :.prelude))
-(local http (require (.. (: ... :match "(.+)%.[^.]+") :.http)))
-(local log (require (.. (: ... :match "(.+)%.[^.]+") :.log)))
-(local {: attach-stats} (require (.. (: ... :match "(.+)%.[^.]+") :.utils)))
+(import-macros {: assert/type : assert/?type} :lib.prelude)
+(local http (require :lib.http))
+(local log (require :lib.log))
+(local {: attach-stats} (require :lib.utils))
 
 
 (lambda fetch [?channel]
@@ -41,5 +40,6 @@
     (catch
       (_ msg)
       (log:error/nil "Failed to get Nixpkgs Vim plugins: " msg))))
+
 
 {: plugins}

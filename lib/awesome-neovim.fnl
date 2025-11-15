@@ -1,7 +1,7 @@
-(local {: merge!} (require (.. (: ... :match "(.+)%.[^.]+") :.prelude)))
-(local http (require (.. (: ... :match "(.+)%.[^.]+") :.http)))
-(local log (require (.. (: ... :match "(.+)%.[^.]+") :.log)))
-(local {: attach-stats} (require (.. (: ... :match "(.+)%.[^.]+") :.utils)))
+(local {: merge!} (require :lib.prelude))
+(local http (require :lib.http))
+(local log (require :lib.log))
+(local {: attach-stats} (require :lib.utils))
 
 
 (lambda fetch []

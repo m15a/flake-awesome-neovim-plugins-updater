@@ -1,5 +1,5 @@
-(import-macros {: assert/type} (.. (: ... :match "(.+)%.[^.]+") :.prelude))
-(local {: clone} (require (.. (: ... :match "(.+)%.[^.]+") :.prelude)))
+(import-macros {: assert/type} :lib.prelude)
+(local {: clone} (require :lib.prelude))
 
 
 (local counter (let [self {:counts {} :total 0}]
