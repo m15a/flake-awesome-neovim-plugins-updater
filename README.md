@@ -21,7 +21,7 @@ It also depends on the following external programs.
 
 - `nix-prefetch-url`: to compute tarball hash,
 - `jq`: to format JSON outputs, and
-- `sed`: to update `README.md`.
+- `gnused`: to update `README.md`.
 
 ## Accessing code hosting services
 
