@@ -4,6 +4,7 @@
 (local {: stablepairs} (require :fennel.utils))
 
 (import-macros {: assert/type} :lib.prelude)
+(local config (require :lib.config))
 (local json (require :lib.json))
 (local log (require :lib.log))
 (local hub (require :lib.hub))
@@ -14,8 +15,7 @@
 (local awesome-neovim (require :lib.awesome-neovim))
 
 
-(local *plugins* {:path (.. (or (os.getenv "DATA_ROOT") "data")
-                            "/awesome-neovim.json")
+(local *plugins* {:path (.. config.data.root "/awesome-neovim.json")
                   :data {}})
 
 (fn *plugins*.init! [self]

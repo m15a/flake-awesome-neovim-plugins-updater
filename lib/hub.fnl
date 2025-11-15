@@ -5,6 +5,7 @@
 
 (import-macros {: assert/type : assert/?type : unless} :lib.prelude)
 (local {: clone : merge! : ignore-case-string=} (require :lib.prelude))
+(local config (require :lib.config))
 (local http (require :lib.http))
 (local json (require :lib.json))
 (local log (require :lib.log))
@@ -15,8 +16,7 @@
 (local hub {:site "missing.hub"
             :token_ {:env "MISSING_TOKEN"}
             :base "api.missing-hub.com"
-            :cache-dir (.. (or (os.getenv :DATA_ROOT) "data")
-                           "/.cache")
+            :cache-dir (.. config.data.root "/.cache")
             :plugins {}})
 
 (fn hub.token [self]

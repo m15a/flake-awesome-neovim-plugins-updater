@@ -1,20 +1,17 @@
 (local http/request (require :http.request))
 
 (import-macros {: assert/type : assert/?type} :lib.prelude)
+(local config (require :lib.config))
 (local log (require :lib.log))
 
 
-(lambda get [uri ?header ?retry ?interval]
+(lambda get [uri ?header]
   (assert/type :string uri)
   (assert/?type :table ?header)
-  (assert/?type :number ?retry)
-  (assert/?type :number ?interval)
   (let [uri (if (uri:match "^https?://")
                 uri
                 (.. "https://" uri))
-        request (http/request.new_from_uri uri)
-        retry (or ?retry 3)
-        interval (or ?interval 3)]
+        request (http/request.new_from_uri uri)]
     (when (not= nil ?header)
       (each [k v (pairs ?header)]
         (request.headers:append k v)))
@@ -25,10 +22,10 @@
         (catch _ (if (> n 0)
                      (do
                        (log:warn "Retrying to get: " uri)
-                       (os.execute (.. "sleep " interval))
+                       (os.execute (.. "sleep " config.http.retry-interval))
                        (go (- n 1)))
                      (values nil (.. "Failed to get: " uri)))))) 
-    (go retry)))
+    (go config.http.retry)))
 
 
 {: get}

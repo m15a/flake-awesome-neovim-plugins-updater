@@ -1,16 +1,7 @@
-(fn get-level []
-  (case (os.getenv "LOG_LEVEL")
-    (where n (not= nil (tonumber n)))
-    (tonumber n)
-    (where s (= :string (type s)))
-    (if (s:match "^[Dd][Ee][Bb][Uu][Gg]$") 0
-        (s:match "^[Ii][Nn][Ff][Oo]$") 1
-        (s:match "^[Ww][Aa][Rr][Nn]$") 2
-        (s:match "^[Ww][Aa][Rr][Nn][Ii][Nn][Gg]$") 2
-        (s:match "^[Ee][Rr][Rr][Oo][Rr]$") 3
-        (error (.. "Invalid LOG_LEVEL: " s)))))
+(local config (require :lib.config))
 
-(local log (let [mt {:level (or (get-level) 1)}]
+
+(local log (let [mt {:level config.log.level}]
                 (set mt.__index mt)
                 mt))
 
