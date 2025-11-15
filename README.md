@@ -13,8 +13,8 @@ are processed out into `data/plugins/awesome-neovim.json`.
 
 - LuaJIT 2.1+
 - Lua libraries:
-   - http 0.3: <https://github.com/daurnimator/lua-http>
-   - cjson 2.1.0: <https://github.com/mpx/lua-cjson>
+  - http 0.3: <https://github.com/daurnimator/lua-http>
+  - cjson 2.1.0: <https://github.com/mpx/lua-cjson>
 - Fennel 1.5+
 
 It also depends on the following external programs.
