@@ -13,8 +13,8 @@
     }:
     let
       version_base = "0.1.0";
-      version_prerelease = self.shortRev or self.dirtyShortRev or "unknown";
-      version = "${version_base}.${version_prerelease}";
+      version_sha = self.shortRev or self.dirtyShortRev or "unknown";
+      version = "${version_base}+${version_sha}";
     in
     flakelight-treefmt ./. {
       inputs.self = self;
