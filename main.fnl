@@ -15,7 +15,7 @@
 
 
 (local *plugins* {:path (.. (or (os.getenv "DATA_ROOT") "data")
-                            "/plugins/awesome-neovim.json")
+                            "/awesome-neovim.json")
                   :data {}})
 
 (fn *plugins*.init! [self]
