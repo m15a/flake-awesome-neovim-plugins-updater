@@ -14,7 +14,8 @@
 (local awesome-neovim (require :lib.awesome-neovim))
 
 
-(local *plugins* {:path "data/plugins/awesome-neovim.json"
+(local *plugins* {:path (.. (or (os.getenv "DATA_ROOT") "data")
+                            "/plugins/awesome-neovim.json")
                   :data {}})
 
 (fn *plugins*.init! [self]

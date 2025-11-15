@@ -18,7 +18,8 @@
 (local hub {:site "missing.hub"
             :token_ {:env "MISSING_TOKEN"}
             :base "api.missing-hub.com"
-            :cache-dir "data/.cache"
+            :cache-dir (.. (or (os.getenv :DATA_ROOT) "data")
+                           "/.cache")
             :plugins {}})
 
 (fn hub.token [self]
