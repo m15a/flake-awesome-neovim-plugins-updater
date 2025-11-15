@@ -3,24 +3,17 @@
   lib,
   stdenv,
   makeWrapper,
+  luajit,
   gnused,
   jq,
-  luajit,
   nix-prefetch,
 }:
 
 let
-  luajit' = luajit.withPackages (
-    ps: with ps; [
-      cjson
-      http
-      fennel
-    ]
-  );
   binDeps = [
+    luajit
     gnused
     jq.bin
-    luajit'
     nix-prefetch
   ];
 in
@@ -30,7 +23,7 @@ stdenv.mkDerivation rec {
   inherit version;
   src = ./.;
   nativeBuildInputs = [ makeWrapper ];
-  buildInputs = [ luajit' ];  # for patchShebangs
+  buildInputs = [ luajit ]; # for patchShebangs
   installPhase = ''
     runHook preInstall
     mkdir -p $out/bin

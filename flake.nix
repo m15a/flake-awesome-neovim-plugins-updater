@@ -19,7 +19,18 @@
     flakelight-treefmt ./. {
       inputs.self = self;
       systems = import systems;
-      package = pkgs: pkgs.callPackage ./package.nix { inherit version; };
+      package =
+        pkgs:
+        let
+          luajit = pkgs.luajit.withPackages (
+            ps: with ps; [
+              cjson
+              http
+              fennel
+            ]
+          );
+        in
+        pkgs.callPackage ./package.nix { inherit version luajit; };
       treefmtConfig.programs = {
         nixfmt.enable = true;
         mdformat.enable = true;
