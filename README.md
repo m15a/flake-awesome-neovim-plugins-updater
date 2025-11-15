@@ -29,7 +29,7 @@ It supports:
 
 - GitHub
 - GitLab
-- SourceHut
+- ~~SourceHut~~: They removed the REST API in favor of GraphQL.
 - Codeberg
 
 For using REST API, GitHub personal access token (PAT) is mandatory,
