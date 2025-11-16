@@ -15,17 +15,17 @@
 (local awesome-neovim (require :lib.awesome-neovim))
 
 
-(local *plugins* {:path (.. config.data.root "/awesome-neovim.json")
-                  :data {}})
+(local data {:path (.. config.data.root "/awesome-neovim-plugins.json")
+             :plugins {}})
 
-(fn *plugins*.init! [self]
-  (set hub.plugins self.data)
+(fn data.init! [self]
+  (set hub.plugins self.plugins)
   (case (json.file->decoded self.path)
     plugins (each [_ plugin (ipairs plugins)]
               (let [{: site : owner : repo} plugin]
                 (when (and site owner repo)
                   (let [key (.. site "/" owner "/" repo)]
-                    (tset self.data key plugin)))))))
+                    (tset self.plugins key plugin)))))))
 
 (lambda update-stats-in-readme [stats marker]
   (assert/type :table stats)
@@ -38,22 +38,25 @@
           _ (log:warn/nil "Failed to execute sed")))
     _ (log:warn "Something wrong with stats: " (view stats))))
 
+(lambda fetch-plugins [plugins]
+  (icollect [_ plugin (stablepairs plugins)]
+    (case plugin.site
+      "github.com" (github:plugin plugin)
+      "gitlab.com" (gitlab:plugin plugin)
+      ;; FIXME: sourcehut removed the REST API in favor of GraphQL.
+      ;; https://sourcehut.org/blog/2025-09-01-whats-cooking-q3-2025/
+      ; (where (or "sr.ht" "git.sr.ht")) (sourcehut:plugin plugin)
+      "codeberg.org" (codeberg:plugin plugin)
+      _ {})))
 
-(*plugins*:init!)
+
+(data:init!)
 (case-try (awesome-neovim.plugins)
-  (an/plugins an/stats) (icollect [_ plugin (stablepairs an/plugins)]
-                          (case plugin.site
-                            "github.com" (github:plugin plugin)
-                            "gitlab.com" (gitlab:plugin plugin)
-                            ;; FIXME: sourcehut removed the REST API in favor of GraphQL.
-                            ;; https://sourcehut.org/blog/2025-09-01-whats-cooking-q3-2025/
-                            ; (where (or "sr.ht" "git.sr.ht")) (sourcehut:plugin plugin)
-                            "codeberg.org" (codeberg:plugin plugin)
-                            _ {}))
-  plugins (do
+  (an/plugins an/stats) (fetch-plugins an/plugins)
+  fetched (do
             (log:info "Awesome Neovim plugins:\n" (view an/stats))
             (update-stats-in-readme an/stats :b3)
-            (case (json.decoded->file plugins *plugins*.path json.format/jq)
+            (case (json.decoded->file fetched data.path json.format/jq)
               true (os.exit true)
               (_ msg) (log:error/exit msg)))
   (catch _ (os.exit false)))
