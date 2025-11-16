@@ -100,9 +100,11 @@
        (if (and cache# (,alive? cache#.time))
            cache#
            (let [out# (do ,(unpack body))]
-             (case (json#.decoded->file out# ,path)
-               true out#
-               (_# msg#) (error msg#)))))))
+             (if (= nil out#)
+                 (values nil "nil value, no cache")
+                 (case (json#.decoded->file out# ,path)
+                   true out#
+                   (_# msg#) (values out# (.. "Failed to cache: " msg#)))))))))
 
 (fn hub.repo [self {: owner : repo}]
   (assert/type :string owner)
