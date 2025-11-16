@@ -55,7 +55,7 @@
   (an/plugins an/stats) (fetch-plugins an/plugins)
   fetched (do
             (log:info "Awesome Neovim plugins:\n" (view an/stats))
-            (update-stats-in-readme an/stats :b3)
+            (update-stats-in-readme an/stats :N_PLUGINS)
             (case (json.decoded->file fetched data.path json.format/jq)
               true (os.exit true)
               (_ msg) (log:error/exit msg)))
