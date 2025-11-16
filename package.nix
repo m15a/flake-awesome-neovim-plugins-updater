@@ -6,7 +6,6 @@
   luajit,
   gnused,
   jq,
-  nix-prefetch,
 }:
 
 let
@@ -14,7 +13,6 @@ let
     luajit
     gnused
     jq.bin
-    nix-prefetch
   ];
 in
 
