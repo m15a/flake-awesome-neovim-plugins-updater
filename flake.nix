@@ -37,6 +37,7 @@
       devShell.packages =
         pkgs: with pkgs; [
           luajit.pkgs.readline
+          fennel-ls
         ];
 
       treefmtConfig.programs = {
