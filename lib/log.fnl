@@ -21,6 +21,10 @@
   (when (<= self.level 2)
     (self "[WARNING] " ...)))
 
+(fn log.warn/nil [self ...]
+  (self:warn ...)
+  nil)
+
 (fn log.error [self ...]
   (when (<= self.level 3)
     (self "[ERROR] " ...)))
