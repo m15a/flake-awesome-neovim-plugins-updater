@@ -16,7 +16,7 @@
       _ default)))
 
 (fn http-retry-interval []
-  (let [default 1]
+  (let [default 3]
     (case (os.getenv "UPDATER_HTTP_RETRY_INTERVAL")
       (where n (not= nil (tonumber n))) (tonumber n)
       _ default)))
