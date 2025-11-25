@@ -117,12 +117,18 @@
                          (tset :site self.site))]
              (if (repo/validate repo_)
                  (do
-                   (unless (ignore-case-string= owner repo_.owner)
+                   (case [(ignore-case-string= owner repo_.owner)
+                          (ignore-case-string= repo repo_.repo)]
+                     [false false]
+                     (log:warn "Owner/repo changed: "
+                               self.site
+                               "/{" owner "/" repo " -> "
+                               repo_.owner "/" repo_.repo "}")
+                     [false true]
                      (log:warn "Owner changed: "
                                self.site
-                               "/{" owner " -> " repo_.owner
-                               "}/" repo))
-                   (unless (ignore-case-string= repo repo_.repo)
+                               "/{" owner " -> " repo_.owner "}/" repo)
+                     [true false]
                      (log:warn "Repo changed: "
                                self.site
                                "/" owner
