@@ -46,8 +46,7 @@
       ;; FIXME: sourcehut removed the REST API in favor of GraphQL.
       ;; https://sourcehut.org/blog/2025-09-01-whats-cooking-q3-2025/
       ; (where (or "sr.ht" "git.sr.ht")) (sourcehut:plugin plugin)
-      "codeberg.org" (codeberg:plugin plugin)
-      _ {})))
+      "codeberg.org" (codeberg:plugin plugin))))
 
 
 (data:init!)
