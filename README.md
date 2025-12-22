@@ -8,7 +8,7 @@ It scrapes [Awesome Neovim][2]'s README and collects the data of plugins
 registered therein. Using the REST APIs of the code hosting services,
 e.g. GitHub, it queries each plugin's description etc. and the latest
 commit information. The queried data are processed out into
-`data/awesome-neovim-plugins.json` to be used in the Nix flake.
+`data/plugins.json` to be used in the Nix flake.
 
 ## Accessing code hosting services
 
