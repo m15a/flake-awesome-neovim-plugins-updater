@@ -37,8 +37,8 @@
   (let [token (self:token)
         header {:content-type "application/json"
                 :authorization (when token (.. "token " token))}
-        base (: self.base :match "(.*[^/])/*$")
-        path (: path :match "^/*([^/].*)")]
+        base (self.base:match "(.*[^/])/*$")
+        path (path:match "^/*([^/].*)")]
     (case (http.get (.. base "/" path) header) 
       (body header*) (values (cjson.decode body) header*)
       (_ msg) (values nil msg))))
@@ -46,7 +46,7 @@
 (lambda hub.repo/cache [self owner repo]
   (assert/type :string owner)
   (assert/type :string repo)
-  (.. (: self.cache-dir :match "(.*[^/])/*$")
+  (.. (self.cache-dir:match "(.*[^/])/*$")
       "/site=" self.site
       "/owner=" owner
       "/repo=" repo

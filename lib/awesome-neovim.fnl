@@ -1,4 +1,3 @@
-(local {: merge!} (require :lib.prelude))
 (local http (require :lib.http))
 (local log (require :lib.log))
 (local {: attach-stats} (require :lib.utils))
@@ -21,7 +20,7 @@
                       "^%s*%-%s+%[[^%]]+%]%(https?://([^/]+)/([^/#%)]+)"]
         done-regex "^%s*##+%s+Preconfigured%s+[Cc]onfiguration"]
     (each [line (readme:gmatch "[^\n]+") &until (= :done state)]
-      (match state
+      (case state
         :init (when (line:match "^%s*##+%s+Plugin%s+[Mm]anager")
                 (set state :active))
         :active (if (line:match active-regex)
