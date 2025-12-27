@@ -17,7 +17,7 @@
 (lambda gitlab.tarball/url [_ owner repo ref]
   (.. "https://gitlab.com/" owner "/" repo "/-/archive/" ref ".tar.gz"))
 
-(lambda gitlab.repo/preprocess
+(fn gitlab.repo/preprocess
   [_ {: default_branch : description : web_url : path : namespace
       : created_at : updated_at : last_activity_at : archived
       : star_count}]
@@ -32,7 +32,7 @@
    :archived (when archived archived)
    :stars_count star_count})
 
-(lambda gitlab.latest/preprocess [_ {: commit}]
+(fn gitlab.latest/preprocess [_ {: commit}]
   {:rev commit.id
    :timestamp commit.committed_date})
 

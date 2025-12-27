@@ -17,7 +17,7 @@
 (lambda codeberg.tarball/url [_ owner repo rev]
   (.. "https://codeberg.org/" owner "/" repo "/archive/" rev ".tar.gz"))
 
-(lambda codeberg.repo/preprocess
+(fn codeberg.repo/preprocess
   [_ {: default_branch : description : html_url : website : name : owner
       : created_at : updated_at : archived : archived_at
       : stars_count}]
@@ -35,7 +35,7 @@
                   archived_at)
    : stars_count})
 
-(lambda codeberg.latest/preprocess [_ {: commit}]
+(fn codeberg.latest/preprocess [_ {: commit}]
   {:rev commit.id :timestamp commit.timestamp})
 
 

@@ -17,7 +17,7 @@
 (lambda github.tarball/url [_ owner repo rev]
   (.. "https://github.com/" owner "/" repo "/archive/" rev ".tar.gz"))
 
-(lambda github.repo/preprocess
+(fn github.repo/preprocess
   [_ {: default_branch : description : homepage : license : name : owner
       : created_at : updated_at : archived
       : stargazers_count}]
@@ -32,7 +32,7 @@
    :archived (when archived archived)
    :stars_count stargazers_count})
 
-(lambda github.latest/preprocess [_ {: sha : commit}]
+(fn github.latest/preprocess [_ {: sha : commit}]
   {:rev sha
    :timestamp commit.committer.date})
 
