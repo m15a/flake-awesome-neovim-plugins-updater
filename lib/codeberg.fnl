@@ -19,7 +19,7 @@
 
 (lambda codeberg.repo/preprocess
   [_ {: default_branch : description : html_url : website : name : owner
-      : created_at : updated_at
+      : created_at : updated_at : archived : archived_at
       : stars_count}]
   {:owner owner.username
    :repo name
@@ -29,6 +29,10 @@
                  (unless (empty? html_url) html_url))
    : created_at
    : updated_at
+   :archived (when archived archived)
+   :archived_at (when (and archived_at
+                           (not (archived_at:match "^1970%-01%-01T")))
+                  archived_at)
    : stars_count})
 
 (lambda codeberg.latest/preprocess [_ {: commit}]

@@ -19,7 +19,7 @@
 
 (lambda gitlab.repo/preprocess
   [_ {: default_branch : description : web_url : path : namespace
-      : created_at : updated_at : last_activity_at
+      : created_at : updated_at : last_activity_at : archived
       : star_count}]
   {:owner namespace.path
    :repo path
@@ -29,6 +29,7 @@
    : created_at
    ;; See https://docs.gitlab.com/api/projects/
    :updated_at (or updated_at last_activity_at)
+   :archived (when archived archived)
    :stars_count star_count})
 
 (lambda gitlab.latest/preprocess [_ {: commit}]

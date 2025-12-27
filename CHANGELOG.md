@@ -15,6 +15,7 @@ and this project adheres to
   - Stars count (`stars_count`)
   - Created timestamp (`created_at`)
   - Updated (i.e., last activity) timestamp (`updated_at`)
+  - Whether archived or not (`archived`)
 
 ## [0.1.0] - 2025-12-25
 
