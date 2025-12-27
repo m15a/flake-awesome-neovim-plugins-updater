@@ -19,6 +19,7 @@
 
 (lambda github.repo/preprocess
   [_ {: default_branch : description : homepage : license : name : owner
+      : created_at : updated_at
       : stargazers_count}]
   {:owner owner.login
    :repo name
@@ -26,6 +27,8 @@
    :description (unless (empty? description) description)
    :homepage (unless (empty? homepage) homepage)
    :license (unless (empty? license) license.spdx_id)
+   : created_at
+   : updated_at
    :stars_count stargazers_count})
 
 (lambda github.latest/preprocess [_ {: sha : commit}]
