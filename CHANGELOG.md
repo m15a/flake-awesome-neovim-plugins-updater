@@ -11,10 +11,10 @@ and this project adheres to
 
 ### Added
 
-- Collect meta data of GitHub and Codeberg repositories.
+- Collect meta data of GitHub, GitLab, and Codeberg repositories.
   - Stars count (`stars_count`)
   - Created timestamp (`created_at`)
-  - Updated timestamp (`updated_at`)
+  - Updated (i.e., last activity) timestamp (`updated_at`)
 
 ## [0.1.0] - 2025-12-25
 

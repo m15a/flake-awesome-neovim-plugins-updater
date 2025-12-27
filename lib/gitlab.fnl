@@ -18,12 +18,18 @@
   (.. "https://gitlab.com/" owner "/" repo "/-/archive/" ref ".tar.gz"))
 
 (lambda gitlab.repo/preprocess
-  [_ {: default_branch : description : web_url : path : namespace}]
+  [_ {: default_branch : description : web_url : path : namespace
+      : created_at : updated_at : last_activity_at
+      : star_count}]
   {:owner namespace.path
    :repo path
    :default_ref default_branch
    :description (unless (empty? description) description)
-   :homepage (unless (empty? web_url) web_url)})
+   :homepage (unless (empty? web_url) web_url)
+   : created_at
+   ;; See https://docs.gitlab.com/api/projects/
+   :updated_at (or updated_at last_activity_at)
+   :stars_count star_count})
 
 (lambda gitlab.latest/preprocess [_ {: commit}]
   {:rev commit.id
