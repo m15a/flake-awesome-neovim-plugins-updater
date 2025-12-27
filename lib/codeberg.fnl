@@ -18,13 +18,15 @@
   (.. "https://codeberg.org/" owner "/" repo "/archive/" rev ".tar.gz"))
 
 (lambda codeberg.repo/preprocess
-  [_ {: default_branch : description : html_url : website : name : owner}]
+  [_ {: default_branch : description : html_url : website : name : owner
+      : stars_count}]
   {:owner owner.username
    :repo name
    :default_ref default_branch
    :description (unless (empty? description) description)
    :homepage (or (unless (empty? website) website)
-                 (unless (empty? html_url) html_url))})
+                 (unless (empty? html_url) html_url))
+   : stars_count})
 
 (lambda codeberg.latest/preprocess [_ {: commit}]
   {:rev commit.id :timestamp commit.timestamp})
