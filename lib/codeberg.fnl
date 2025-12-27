@@ -19,6 +19,7 @@
 
 (lambda codeberg.repo/preprocess
   [_ {: default_branch : description : html_url : website : name : owner
+      : created_at : updated_at
       : stars_count}]
   {:owner owner.username
    :repo name
@@ -26,6 +27,8 @@
    :description (unless (empty? description) description)
    :homepage (or (unless (empty? website) website)
                  (unless (empty? html_url) html_url))
+   : created_at
+   : updated_at
    : stars_count})
 
 (lambda codeberg.latest/preprocess [_ {: commit}]
