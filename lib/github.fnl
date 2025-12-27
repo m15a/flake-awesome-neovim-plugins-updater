@@ -18,13 +18,15 @@
   (.. "https://github.com/" owner "/" repo "/archive/" rev ".tar.gz"))
 
 (lambda github.repo/preprocess
-  [_ {: default_branch : description : homepage : license : name : owner}]
+  [_ {: default_branch : description : homepage : license : name : owner
+      : stargazers_count}]
   {:owner owner.login
    :repo name
    :default_ref default_branch
    :description (unless (empty? description) description)
    :homepage (unless (empty? homepage) homepage)
-   :license (unless (empty? license) license.spdx_id)})
+   :license (unless (empty? license) license.spdx_id)
+   :stars_count stargazers_count})
 
 (lambda github.latest/preprocess [_ {: sha : commit}]
   {:rev sha
