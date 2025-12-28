@@ -198,7 +198,9 @@
                (tset :time nil)
                (tset :date (if latest.timestamp
                                (timestamp->date latest.timestamp)
-                               latest.date)))
+                               latest.date))
+               (tset :last_commit_at latest.timestamp)
+               (tset :timestamp nil))
       (catch _ nil))))
 
 

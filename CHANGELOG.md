@@ -11,8 +11,8 @@ and this project adheres to
 
 ### Added
 
-- Collect the latest commit `timestamp`
-- Collect meta data of GitHub, GitLab, and Codeberg repositories.
+- Collect the last commit timestamp (`last_commit_at`)
+- Collect meta data of GitHub, GitLab, and Codeberg repositories:
   - Stars count (`stars_count`)
   - Created timestamp (`created_at`)
   - Updated (i.e., last activity) timestamp (`updated_at`)
