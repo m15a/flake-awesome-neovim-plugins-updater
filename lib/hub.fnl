@@ -196,7 +196,6 @@
       latest (doto (merge! known repo_ latest)
                (tset :default_ref nil)
                (tset :time nil)
-               (tset :timestamp nil)
                (tset :date (if latest.timestamp
                                (timestamp->date latest.timestamp)
                                latest.date)))

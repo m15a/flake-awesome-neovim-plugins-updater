@@ -11,6 +11,7 @@ and this project adheres to
 
 ### Added
 
+- Collect the latest commit `timestamp`
 - Collect meta data of GitHub, GitLab, and Codeberg repositories.
   - Stars count (`stars_count`)
   - Created timestamp (`created_at`)
