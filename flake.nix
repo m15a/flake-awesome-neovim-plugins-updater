@@ -44,12 +44,7 @@
       treefmtConfig.programs = {
         nixfmt.enable = true;
         nixfmt.width = 88;
-        mdformat.enable = true;
-        mdformat.plugins =
-          ps: with ps; [
-            mdformat-gfm
-            mdformat-gfm-alerts
-          ];
+        rumdl-format.enable = true;
       };
     };
 }
