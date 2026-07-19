@@ -1,7 +1,7 @@
 {
   inputs = {
     flakelight-treefmt.url = "github:m15a/flakelight-treefmt";
-    systems.url = "github:nix-systems/default";
+    systems.url = "github:nix-systems/triplet";
   };
   outputs =
     {
